@@ -1,6 +1,6 @@
-/* Copywrite Aron Schatz 2014
- *185394 
- * This IAB MRAID test creative was built by Aron Schatz, currently Editor-in-Chief at ASE Publishing, on 2014-04-22.
+/* Copywrite Aron Schatz 2018
+ * 
+ * 
  */
 
 function $(element)
