@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style>
+    input{vertical-align:middle;}
+    #adcontainer{width:320px; height:480px; background:#ddd; color:#000; position:relative; font-size:14px;}
+    div#adchecklist{position:absolute; top:0%; width:100%; height:300px; background:#000; color:#ddd; text-align:left;}
+    div#adchecklist>div{padding:2px;}
+     div#adchecklist span{display:block;}
+    div#log{position:absolute; bottom:0; width:100%; height:150px; background:#000; color:#ddd; overflow-y:scroll;}
+    div#log>div{padding:1px;}
+    </style>
+  </head>
+  <body>
+  <div id="adcontainer">
+  <div id="adchecklist">
+  <div>
+  
+  <span>
+  <input type="checkbox" id="cmraidenvset"/> MRAID ENV Variable Set
+  </span>
+  
+    <span>
+  <input type="checkbox" id="cmraidloading"/> Is in loading state?
+  </span>
+    <span>
+  <input type="checkbox" id="cmraidready"/> IF Yes: Ready event fired
+  </span>
+    <span>
+  <input type="checkbox" id="cmraidinitdefault"/> Check state=default after ready.
+  </span>
+      <span>
+  <input type="checkbox" id="cmraidexpandstate"/> <a href="#" onclick="expandstatecheck()">Expand/stateChange variable check</a>
+  </span>
+          <span>
+  <input type="checkbox" id="cmraidmanualclose"/> Manual close button for SDK work?
+  </span>
+        <span>
+  <input type="checkbox" id="cmraidexpandsize"/> <a href="#" onclick="expandsizecheck()">Expand/sizeChange variable check</a>
+  </span>
+          <span>
+  <input type="checkbox" id="cmraidadclose"/> <a href="#" onclick="expandsizeclose()">Ad fired mraid.close -> state=default</a>
+  </span>
+            <span>
+  <input type="checkbox" id="cmraidexpand"/> <a href="#" onclick="expand()">Expand ad</a>
+  </span>
+              <span>
+  <input type="checkbox" id="cmraidexpandunload"/> <a href="#" onclick="unload()">Unload from expand (SDK dependent)</a>
+  </span>
+  </div>
+  </div>
+  <div id="log">
+  <div id="logdiv">
+  
+  </div>
+  </div>
+  </div>
+  </body>
+</html>
