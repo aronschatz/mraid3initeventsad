@@ -3,6 +3,7 @@
  * 
  */
 
+
 function $(element)
 {
 	element = document.getElementById(element);
@@ -51,6 +52,10 @@ if(typeof window.MRAID_ENV!='undefined')
     checkenv=true;
     logmessage("CHECK: Detected MRAID_ENV");
     logmessage("Version: "+window.MRAID_ENV.version+" SDK: "+window.MRAID_ENV.sdk+" SDKv: "+window.MRAID_ENV.sdkVersion);
+}
+else
+{
+     logmessage("FAIL: window.MRAID_ENV is not detected");
 }
 
 
