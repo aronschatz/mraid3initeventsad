@@ -16,6 +16,7 @@ scr.setAttribute('type', 'text/javascript');
 head.appendChild(scr);
 window._adclose=false;
 window._step=0;
+window._logclose=0;
 // Viewport setup
 var meta = document.querySelector("meta[name=viewport]");
 if (!meta)
@@ -191,8 +192,13 @@ function stepchange(step)
 function statechange(state)
 {
 	updateprops("State Change");
-        
-        //Log is visibile upon expandind. Handle toggling between 
+        if(window._logclose==1 && state=='default') //Handle the close button case
+        {
+            $('step').style.display='break';
+            $('expand').style.display='block';
+            $('close').style.display='none';
+            window._logclose=0;
+        }
 }
 
 
@@ -233,7 +239,7 @@ function updateprops(event)
 	  "Scr: width: " + gss.width + ", height: " + gss.height+"] ["+
 	  "expProps: width: " + expp.width + ", height: " + expp.height +"] ["+
 	  "Current orientation: " + orient+"] ["+
-          "State: " + mraid.getState()+"]"+
+          "State: " + mraid.getState()+"] ["+
           "Last Event: " + event+"]"
 	);
 }
@@ -246,6 +252,7 @@ function expand()
     $('step').style.display='none';
     $('expand').style.display='none';
     $('close').style.display='block';
+    window._logclose=1;
 }
 
 function close()
