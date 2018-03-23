@@ -46,7 +46,7 @@ function logmessage(message)
 
 
 //Check MRAID_ENV
-if(window.MRAID_ENV!='undefined')
+if(typeof window.MRAID_ENV!='undefined')
 {
     checkenv=true;
     logmessage("CHECK: Detected MRAID_ENV");
