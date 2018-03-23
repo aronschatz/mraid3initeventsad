@@ -113,14 +113,14 @@ function initad()
 	var checklogdiv = document.createElement("div"); //This is where buttons go
 	checklogdiv.id = 'checklog';
         var link=document.createElement('a');
-        link.onClick="expand()";
-        link.text="See Log"
-        link.id='expand';
+        link.setAttribute('onclick',"expand()");
+        link.setAttribute('text',"See Log");
+        link.setAttribute('id',"expand");
         checklogdiv.appendChild(link);
         var link=document.createElement('a');
-        link.onClick="close()";
-        link.text="Hide Log To Continue"
-        link.id='close';
+        link.setAttribute('onclick',"close()");
+        link.setAttribute('text',"Hide Log To Continue");
+        link.setAttribute('id',"close");
         link.style.display='none';
         checklogdiv.appendChild(link);
 	parentdiv.appendChild(checklogdiv);
