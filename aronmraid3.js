@@ -114,12 +114,12 @@ function initad()
 	checklogdiv.id = 'checklog';
         var link=document.createElement('a');
         link.setAttribute('onclick',"expand()");
-        link.setAttribute('text',"See Log");
+        link.appendChild(document.createTextNode('See Log'))
         link.setAttribute('id',"expand");
         checklogdiv.appendChild(link);
         var link=document.createElement('a');
         link.setAttribute('onclick',"close()");
-        link.setAttribute('text',"Hide Log To Continue");
+        link.appendChild(document.createTextNode('Hide Log To Continue'))
         link.setAttribute('id',"close");
         link.style.display='none';
         checklogdiv.appendChild(link);
