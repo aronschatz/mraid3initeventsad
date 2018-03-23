@@ -14,6 +14,7 @@ scr.setAttribute('src', 'mraid.js');
 scr.setAttribute('type', 'text/javascript');
 head.appendChild(scr);
 window._adclose=false;
+window._step=0;
 // Viewport setup
 var meta = document.querySelector("meta[name=viewport]");
 if (!meta)
@@ -94,11 +95,96 @@ function initad()
          logmessage("CHECK: State is default after ready");   
         }
         window._maxsize=mraid.getMaxSize();
+        //Now setup content
+        var head = document.getElementsByTagName("head")[0];
+	var style = document.createElement('style');
+	style.setAttribute('type', 'text/css')
+	style.appendChild(document.createTextNode('body{padding:5px;}'));
+	head.appendChild(style);
+	var parentdiv = $('aroniabmraid3ad');
+	var checklogdiv = document.createElement("div"); //This is where buttons go
+	checklogdiv.id = 'checklog';
+        var link=document.createElement('a');
+        link.onClick="expand()";
+        link.text="See Log"
+        link.id='expand';
+        checklogdiv.appendChild(link);
+        var link=document.createElement('a');
+        link.onClick="close()";
+        link.text="Hide Log To Continue"
+        link.id='close';
+        link.style.display='none';
+        checklogdiv.appendChild(link);
+	parentdiv.appendChild(checklogdiv);
+	var stepdiv = document.createElement("div"); // This is pure information
+	stepdiv.id = 'step';
+	parentdiv.appendChild(stepdiv);
+	/*var waterdiv = document.createElement("div"); //This is to show how sizing is working, visually
+	waterdiv.id = 'waterdiv';
+	waterdiv.appendChild(document.createTextNode("IAB MRAID3 Events Compliance Ad."));
+	parentdiv.appendChild(waterdiv);*/
+	var logdiv = document.createElement("div"); //A generic div for showing logmessage inline...
+	logdiv.id = 'log';
+	parentdiv.appendChild(logdiv);
+        stepchange(1);
+}
+
+function stepchange(step)
+{
+    //Clear everything from stepdiv, first
+    var stepdiv=$('step');
+    while (stepdiv.firstChild)
+    {
+            stepdiv.removeChild(stepdiv.firstChild);
+    }
+    
+    var div=document.createElement('div');
+
+    switch(step)
+    {
+        case 1:
+            var link=document.createElement('a');
+            link.onClick="expandstatecheck()";
+            link.text="Tap For Expand/stateChange Check"
+            div.appendChild(link);
+            break;
+        case 2:
+            var span=document.createElement('span');
+            span.text="Tap SDK Close Button"
+            div.appendChild(span);
+            break;
+        case 3:
+            var link=document.createElement('a');
+            link.onClick="expandsizecheck()";
+            link.text="Tap For Expand/sizeChange Check"
+            div.appendChild(link);
+            break;
+        case 4:
+            var link=document.createElement('a');
+            link.onClick="expandsizeclose()";
+            link.text="Tap To Close Expand"
+            div.appendChild(link);
+        case 5:
+            var link=document.createElement('a');
+            link.onClick="expandsizeclose()";
+            link.text="Tap To Check Logs"
+            div.appendChild(link);
+            break;
+        case 6:
+            var link=document.createElement('a');
+            link.onClick="unload()";
+            link.text="Tap To Unload"
+            div.appendChild(link);
+            break;
+    }
+    stepdiv.appendChild(div);
 }
 
 function statechange(state)
 {
-	updateprops("State Change ("+state+", mraid object="+mraid.getState()+")");
+	updateprops("State Change");
+        
+        //Log is visibile upon expandind. Handle toggling between 
 }
 
 
@@ -112,16 +198,61 @@ function mraiderror(message,action)
 	updateprops("MRAID Error: '"+message+"' From: "+action);
 }
 
+function sizechange()
+{
+    updateprops("Size Change");
+}
+
+function updateprops(event)
+{
+	var gcp = mraid.getCurrentPosition();
+	var gss = mraid.getScreenSize();
+	var expp = mraid.getExpandProperties();
+	var orient = 'Undefined!';
+	switch (window.orientation)
+	{
+	case 0:
+	case 180:
+		orient = 'Portrait';
+		break;
+	case 90:
+	case -90:
+		orient = 'Landscape';
+		break;
+	}
+	logmessage("[Cur: x: " + gcp.x + ", y: " + gcp.y + ", width: " + gcp.width + ", height: " + gcp.height+"] ["+
+	  "Window: x: " + window.innerWidth + ", y: " + window.innerHeight+"] ["+
+	  "Scr: width: " + gss.width + ", height: " + gss.height+"] ["+
+	  "expProps: width: " + expp.width + ", height: " + expp.height +"] ["+
+	  "Current orientation: " + orient+"] ["+
+          "State: " + mraid.getState()+"]"+
+          "Last Event: " + event+"]"
+	);
+}
+
 
 function expand()
 {
     mraid.expand();
+    //Show close to continue
+    $('step').style.display='none';
+    $('expand').style.display='none';
+    $('close').style.display='block';
+}
+
+function close()
+{
+    mraid.close();
+    //Show steps again
+    $('step').style.display='block';
+    $('expand').style.display='block';
+    $('close').style.display='none';
 }
 
 function unload()
 {
-    logmessage('Unloading...');
-    mraidl.unload();
+    updateprops('Unload');
+    mraid.unload();
 
 }
 
@@ -164,6 +295,7 @@ function expandstatecheck()
     }
     mraid.removeEventListener('stateChange',expandstatecheck);
     mraid.addEventListener('stateChange',manualclosecheck);
+    stepchange(2);
 }
 
 function manualclosecheck()
@@ -179,6 +311,7 @@ function manualclosecheck()
         logmessage('FAIL: Variables check upon stateChange after manual close');
     }
     mraid.removeEventListener('stateChange',manualclosecheck);
+    stepchange(3);
 }
 
 function expandsizecheck()
@@ -201,17 +334,13 @@ function expandsizecheck()
         logmessage('FAIL: Variables check upon sizeChange after expand');
     }
     mraid.removeEventListener('sizeChange',expandsizecheck);
-    window._adclose=true;
+    stepchange(4);
 }
 
 function expandsizeclose()
 {
-    mraid.addEventListener('sizeChange',adclosesizecheck);   
-    if(window._adclose)
-    {
-        mraid.close();
-    }
-
+    mraid.addEventListener('sizeChange',adclosesizecheck);
+    mraid.close();
 }
 
 function adclosesizecheck()
@@ -227,4 +356,12 @@ function adclosesizecheck()
         logmessage('FAIL: Variables check upon sizeChange after ad close');
     }
     mraid.removeEventListener('sizeChange',adclosesizecheck);   
+    stepchange(5);
+}
+
+function expandlog()
+{
+    stepchange(6);
+    $('checklog').style.display='none'; //Last step, remove this
+    mraid.expand();
 }
