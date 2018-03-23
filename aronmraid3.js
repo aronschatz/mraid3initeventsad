@@ -75,7 +75,10 @@ function readycheck()
 	mraid.addEventListener('error', mraiderror);
 	mraid.addEventListener('stateChange', statechange);
 	mraid.addEventListener('sizeChange', sizechange);
-        mraid.addEventListener('audioVolumeChange', volumechange);
+        if(mraid.getVersion=='3.0') //To get by with MRAID 2 SDK for now
+        {
+            mraid.addEventListener('audioVolumeChange', volumechange);
+        }
 	mraid.removeEventListener('stateChange', statechange);
 	mraid.addEventListener('stateChange', statechange); //Just to check that removing and adding the same event listener works.
 }
