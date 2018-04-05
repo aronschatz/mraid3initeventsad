@@ -153,8 +153,8 @@ function stepchange(step)
     {
         case 1:
             var link=document.createElement('a');
-            link.onClick="expandstatecheck()";
-            link.text="Tap For Expand/stateChange Check"
+            link.setAttribute('onclick',"expandstatecheck()");
+            link.appendChild(document.createTextNode('Tap For Expand/stateChange Check'))
             div.appendChild(link);
             break;
         case 2:
