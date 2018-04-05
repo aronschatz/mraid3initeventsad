@@ -126,14 +126,14 @@ function initad()
         checklogdiv.appendChild(link);
 	parentdiv.appendChild(checklogdiv);
 	var stepdiv = document.createElement("div"); // This is pure information
-	stepdiv.id = 'step';
+        stepdiv.setAttribute('id','step');
 	parentdiv.appendChild(stepdiv);
 	/*var waterdiv = document.createElement("div"); //This is to show how sizing is working, visually
 	waterdiv.id = 'waterdiv';
 	waterdiv.appendChild(document.createTextNode("IAB MRAID3 Events Compliance Ad."));
 	parentdiv.appendChild(waterdiv);*/
 	var logdiv = document.createElement("div"); //A generic div for showing logmessage inline...
-	logdiv.id = 'log';
+        logdiv.setAttribute('id','log');
 	parentdiv.appendChild(logdiv);
         stepchange(1);
 }
@@ -159,30 +159,30 @@ function stepchange(step)
             break;
         case 2:
             var span=document.createElement('span');
-            span.text="Tap SDK Close Button"
+            span.appendChild(document.createTextNode('Tap SDK Close Button'))
             div.appendChild(span);
             break;
         case 3:
             var link=document.createElement('a');
-            link.onClick="expandsizecheck()";
-            link.text="Tap For Expand/sizeChange Check"
+            link.setAttribute('onclick',"expandsizecheck()");
+            link.appendChild(document.createTextNode('Tap For Expand/sizeChange Check'))
             div.appendChild(link);
             break;
         case 4:
             var link=document.createElement('a');
-            link.onClick="expandsizeclose()";
-            link.text="Tap To Close Expand"
+            link.setAttribute('onclick',"expandsizeclose()");
+            link.appendChild(document.createTextNode('Tap To Close Expand'))
             div.appendChild(link);
         case 5:
             var link=document.createElement('a');
-            link.onClick="expandsizeclose()";
-            link.text="Tap To Check Logs"
+            link.setAttribute('onclick',"expand()");
+            link.appendChild(document.createTextNode('Tap To Check Logs'))
             div.appendChild(link);
             break;
         case 6:
             var link=document.createElement('a');
-            link.onClick="unload()";
-            link.text="Tap To Unload"
+            link.setAttribute('onclick',"unload()");
+            link.appendChild(document.createTextNode('Tap To Unload'))
             div.appendChild(link);
             break;
     }
