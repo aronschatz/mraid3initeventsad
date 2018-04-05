@@ -117,6 +117,7 @@ function initad()
         link.setAttribute('onclick',"expand()");
         link.appendChild(document.createTextNode('See Log'))
         link.setAttribute('id',"expand");
+        link.style.display='none';
         checklogdiv.appendChild(link);
         var link=document.createElement('a');
         link.setAttribute('onclick',"close()");
@@ -292,7 +293,7 @@ else
 function expandstatecheck()
 {
     //Add an event listener only for state change for this check
-    mraid.addEventListener('stateChange',expandstatecheck);
+    //mraid.addEventListener('stateChange',expandstatecheck);
 	mraid.expand();
 }
 
