@@ -293,8 +293,9 @@ else
 function expandstatecheck()
 {
     //Add an event listener only for state change for this check
-    //mraid.addEventListener('stateChange',expandstatecheck);
-	mraid.expand();
+    mraid.addEventListener('stateChange',expandstatecheck);
+    mraid.expand();
+    console.log('called mraid.expand()');
 }
 
 function expandstatecheck()
