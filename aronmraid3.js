@@ -42,7 +42,7 @@ function logmessage(message)
 	var logdiv = $('log');
 	if(logdiv)
 	{
-            if(Array.isArray(window._log)))
+            if(Array.isArray(window._log))
             {
                 var msg='';
                 while(window._log.length)
