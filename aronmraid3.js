@@ -38,7 +38,7 @@ var checkdefault=false;
 function logmessage(message)
 { //Dual logging. It will show in the console and in the ad.
 	console.log(message);
-	var logdiv = $('logdiv');
+	var logdiv = $('log');
 	if(logdiv)
 	{
 		logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
@@ -194,13 +194,13 @@ function statechange(state)
 {
 	updateprops("State Change");
         $('log').style.display='none';
-        if(window._logclose==1 && state=='default') //Handle the close button case
+        /*if(window._logclose==1 && state=='default') //Handle the close button case
         {
             $('step').style.display='break';
             $('expand').style.display='block';
             $('close').style.display='none';
             window._logclose=0;
-        }
+        }*/
         if(state=='expanded')
         {
          $('log').style.display='block';   
@@ -299,7 +299,6 @@ function expandstatecheck()
 {
     //Add an event listener only for state change for this check
     mraid.addEventListener('stateChange',expandstatechecklisten);
-    logmessage('Between');
     mraid.expand();
 }
 
