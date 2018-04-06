@@ -47,7 +47,7 @@ function logmessage(message)
                 var msg='';
                 while(window._log.length)
                 {
-                    msg=window._log.shift()
+                    msg=window._log.shift();
                     logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
                     logdiv.insertBefore(document.createTextNode(msg),logdiv.firstChild);
                 }
