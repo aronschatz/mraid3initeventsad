@@ -45,8 +45,9 @@ function logmessage(message)
             if(typeof window._log == 'Object')
             {
                 var msg='';
-                while(msg=window._log.shift())
+                while(window._log.length)
                 {
+                    msg=window._log.shift()
                     logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
                     logdiv.insertBefore(document.createTextNode(msg),logdiv.firstChild);
                 }
@@ -190,6 +191,7 @@ function stepchange(step)
             link.setAttribute('onclick',"expandsizeclose()");
             link.appendChild(document.createTextNode('Tap To Close Expand'))
             div.appendChild(link);
+            break;
         case 5:
             var link=document.createElement('a');
             link.setAttribute('onclick',"expand()");
