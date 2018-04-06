@@ -193,12 +193,17 @@ function stepchange(step)
 function statechange(state)
 {
 	updateprops("State Change");
+        $('log').style.display='none';
         if(window._logclose==1 && state=='default') //Handle the close button case
         {
             $('step').style.display='break';
             $('expand').style.display='block';
             $('close').style.display='none';
             window._logclose=0;
+        }
+        if(state=='expanded')
+        {
+         $('log').style.display='block';   
         }
 }
 
@@ -294,6 +299,7 @@ function expandstatecheck()
 {
     //Add an event listener only for state change for this check
     mraid.addEventListener('stateChange',expandstatecheck);
+    logmessage('Between');
     mraid.expand();
 }
 
