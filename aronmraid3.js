@@ -298,12 +298,12 @@ else
 function expandstatecheck()
 {
     //Add an event listener only for state change for this check
-    //mraid.addEventListener('stateChange',expandstatecheck);
+    mraid.addEventListener('stateChange',expandstatechecklisten);
     logmessage('Between');
     mraid.expand();
 }
 
-function expandstatecheck()
+function expandstatechecklisten()
 {
  //Check state, check sizing   
     var curpos=mraid.getCurrentPosition();
@@ -315,12 +315,12 @@ function expandstatecheck()
     {
         logmessage('FAIL: Variables check upon stateChange after expand');
     }
-    mraid.removeEventListener('stateChange',expandstatecheck);
-    mraid.addEventListener('stateChange',manualclosecheck);
+    mraid.removeEventListener('stateChange',expandstatechecklisten);
+    mraid.addEventListener('stateChange',manualclosechecklisten);
     stepchange(2);
 }
 
-function manualclosecheck()
+function manualclosechecklisten()
 {
  //Check state, check sizing   
     var curpos=mraid.getCurrentPosition();
@@ -332,18 +332,18 @@ function manualclosecheck()
     {
         logmessage('FAIL: Variables check upon stateChange after manual close');
     }
-    mraid.removeEventListener('stateChange',manualclosecheck);
+    mraid.removeEventListener('stateChange',manualclosechecklisten);
     stepchange(3);
 }
 
 function expandsizecheck()
 {
     //Add an event listener only for size change for this check
-    mraid.addEventListener('sizeChange',expandsizecheck);
+    mraid.addEventListener('sizeChange',expandsizechecklisten);
 	mraid.expand();
 }
 
-function expandsizecheck()
+function expandsizechecklisten()
 {
  //Check state, check sizing   
     var curpos=mraid.getCurrentPosition();
@@ -355,17 +355,17 @@ function expandsizecheck()
     {
         logmessage('FAIL: Variables check upon sizeChange after expand');
     }
-    mraid.removeEventListener('sizeChange',expandsizecheck);
+    mraid.removeEventListener('sizeChange',expandsizechecklisten);
     stepchange(4);
 }
 
 function expandsizeclose()
 {
-    mraid.addEventListener('sizeChange',adclosesizecheck);
+    mraid.addEventListener('sizeChange',adclosesizechecklisten);
     mraid.close();
 }
 
-function adclosesizecheck()
+function adclosesizechecklisten()
 {
   //Check state, check sizing   
     var curpos=mraid.getCurrentPosition();
@@ -377,7 +377,7 @@ function adclosesizecheck()
     {
         logmessage('FAIL: Variables check upon sizeChange after ad close');
     }
-    mraid.removeEventListener('sizeChange',adclosesizecheck);   
+    mraid.removeEventListener('sizeChange',adclosesizechecklisten);   
     stepchange(5);
 }
 
