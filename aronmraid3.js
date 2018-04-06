@@ -298,7 +298,7 @@ else
 function expandstatecheck()
 {
     //Add an event listener only for state change for this check
-    mraid.addEventListener('stateChange',expandstatecheck);
+    //mraid.addEventListener('stateChange',expandstatecheck);
     logmessage('Between');
     mraid.expand();
 }
@@ -306,7 +306,7 @@ function expandstatecheck()
 function expandstatecheck()
 {
  //Check state, check sizing   
-    /*var curpos=mraid.getCurrentPosition();
+    var curpos=mraid.getCurrentPosition();
     if(curpos.width==mraid.getMaxSize().width && curpos.height==mraid.getMaxSize().height && mraid.getState()=='expanded')
     {
         logmessage('CHECK: Variables check upon stateChange after expand');
@@ -316,7 +316,7 @@ function expandstatecheck()
         logmessage('FAIL: Variables check upon stateChange after expand');
     }
     mraid.removeEventListener('stateChange',expandstatecheck);
-    mraid.addEventListener('stateChange',manualclosecheck);*/
+    mraid.addEventListener('stateChange',manualclosecheck);
     stepchange(2);
 }
 
