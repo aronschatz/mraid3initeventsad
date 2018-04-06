@@ -194,7 +194,7 @@ function stepchange(step)
             break;
         case 5:
             var link=document.createElement('a');
-            link.setAttribute('onclick',"expand()");
+            link.setAttribute('onclick',"expandlog()");
             link.appendChild(document.createTextNode('Tap To Check Logs'))
             div.appendChild(link);
             break;
@@ -212,13 +212,13 @@ function statechange(state)
 {
 	updateprops("State Change");
         $('log').style.display='none';
-        /*if(window._logclose==1 && state=='default') //Handle the close button case
+        if(window._logclose==1 && state=='default') //Handle the close button case
         {
             $('step').style.display='break';
             $('expand').style.display='block';
             $('close').style.display='none';
             window._logclose=0;
-        }*/
+        }
         if(state=='expanded')
         {
          $('log').style.display='block';   
