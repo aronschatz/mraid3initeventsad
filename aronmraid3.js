@@ -17,6 +17,7 @@ head.appendChild(scr);
 window._adclose=false;
 window._step=0;
 window._logclose=0;
+window._log=[];
 // Viewport setup
 var meta = document.querySelector("meta[name=viewport]");
 if (!meta)
@@ -41,9 +42,22 @@ function logmessage(message)
 	var logdiv = $('log');
 	if(logdiv)
 	{
-		logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
-		logdiv.insertBefore(document.createTextNode(new Date().getTime()+": "+message),logdiv.firstChild);
+            if(typeof window._log == 'Object')
+            {
+                while(var msg=window._log.shift())
+                {
+                    logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
+                    logdiv.insertBefore(document.createTextNode(msg),logdiv.firstChild);
+                }
+                unset(window._log);
+            }
+            logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
+            logdiv.insertBefore(document.createTextNode(new Date().getTime()+": "+message),logdiv.firstChild);
 	}
+	else
+        {
+            window._log[]=new Date().getTime()+": "+message;
+        }
 }
 
 
