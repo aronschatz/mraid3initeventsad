@@ -57,7 +57,7 @@ function logmessage(message)
 	}
 	else
         {
-            window._log[]=new Date().getTime()+": "+message;
+            window._log.push(new Date().getTime()+": "+message);
         }
 }
 
