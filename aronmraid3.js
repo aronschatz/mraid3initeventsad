@@ -51,7 +51,7 @@ function logmessage(message)
                     logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
                     logdiv.insertBefore(document.createTextNode(msg),logdiv.firstChild);
                 }
-                unset(window._log);
+                window._log=null;
             }
             logdiv.insertBefore(document.createElement("br"),logdiv.firstChild);
             logdiv.insertBefore(document.createTextNode(new Date().getTime()+": "+message),logdiv.firstChild);
