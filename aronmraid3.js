@@ -118,6 +118,7 @@ function initad()
         {
          logmessage("CHECK: State is default after ready");   
         }
+        logmessage("MRAID Version: "+mraid.getVersion());
         window._maxsize=mraid.getMaxSize();
         //Now setup content
         var head = document.getElementsByTagName("head")[0];
